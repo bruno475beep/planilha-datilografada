@@ -6,6 +6,8 @@ Uma planilha no navegador com cara de bloco colunar batido à máquina: fita bic
 
 - Fórmulas em português, com `;` entre argumentos: `=SOMA(C5:C12)`, `=MÉDIA(…)`, `=MÁX(…)`, `=MÍN(…)`, `=CONT(…)`, `=ARRED(x;2)`, `=SE(cond;a;b)`, `=ABS(x)`.
 - Números no padrão brasileiro (`1.234,56`); negativos saem em vermelho.
+- Seleção de várias células: arraste o mouse, Shift+clique ou Shift+setas (Ctrl+A marca tudo). Negrito, sublinhado, total, fita vermelha, Del e Ctrl+C valem para a faixa.
+- Apagar uma célula devolve a cor do papel; só bater por cima deixa a mancha de corretivo.
 - Cola blocos copiados do Excel e copia de volta.
 - Tudo fica salvo só no seu navegador (localStorage). Não há servidor, conta nem rastreamento.
 
