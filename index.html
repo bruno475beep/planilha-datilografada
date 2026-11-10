@@ -904,14 +904,24 @@ html[data-modo="1895"] .grid td input.ed { font-size: 16px; background: rgba(247
     if (!sound) return;
     const a = ac(); if (!a) return;
     if (modo === "1895") {
-      const len = Math.floor(a.sampleRate * 0.09);
+      // pena no papel: ruído grave e macio, com a aspereza irregular das fibras, entrada e saída suaves
+      const dur = 0.12 + Math.random() * 0.08, len = Math.floor(a.sampleRate * dur);
       const buf = a.createBuffer(1, len, a.sampleRate);
       const d = buf.getChannelData(0);
-      for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.sin(Math.PI * i / len) * (0.6 + 0.4 * Math.sin(i / 37));
+      let ruido = 0, fibra = 0.6, alvo = 0.6;
+      for (let i = 0; i < len; i++) {
+        const t = i / len;
+        if (i % 300 === 0) alvo = 0.4 + Math.random() * 0.6;
+        fibra += (alvo - fibra) * 0.004;
+        ruido = ruido * 0.7 + (Math.random() * 2 - 1) * 0.3;
+        const env = Math.min(1, t / 0.25) * Math.pow(1 - t, 1.5);
+        d[i] = ruido * env * fibra;
+      }
       const src = a.createBufferSource(); src.buffer = buf;
-      const f = a.createBiquadFilter(); f.type = "highpass"; f.frequency.value = 2800 + Math.random() * 1500;
-      const g = a.createGain(); g.gain.value = 0.16;
-      src.connect(f); f.connect(g); g.connect(a.destination); src.start();
+      const bp = a.createBiquadFilter(); bp.type = "bandpass"; bp.frequency.value = 1300 + Math.random() * 600; bp.Q.value = 0.5;
+      const lp = a.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 2600;
+      const g = a.createGain(); g.gain.value = 0.35;
+      src.connect(bp); bp.connect(lp); lp.connect(g); g.connect(a.destination); src.start();
       return;
     }
     const len = Math.floor(a.sampleRate * 0.035);
