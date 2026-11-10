@@ -6,7 +6,7 @@
 <title>Planilha Datilografada</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:wght@400;700&family=Barlow+Condensed:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:wght@400;700&family=Barlow+Condensed:wght@500;600&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Petit+Formal+Script&family=Pinyon+Script&display=swap" rel="stylesheet">
 <style>
 :root {
   /* Mesa escura; folha de bloco colunar pautado em verde; fita bicolor preta/vermelha; lápis copiativo azul para a seleção */
@@ -137,6 +137,66 @@ table.grid { border-collapse: collapse; table-layout: fixed; font-family: var(--
 }
 .toast.show { opacity: 1; }
 
+/* ---------- modo 1895: livro-caixa escrito à mão, pena e tinta ferrogálica ---------- */
+.m95 { display: none; }
+html[data-modo="1895"] .m40 { display: none; }
+html[data-modo="1895"] .m95 { display: inline; }
+html[data-modo="1895"] {
+  --desk: #2b1d13;
+  --desk-2: #170f09;
+  --paper: #f2e8cf;
+  --rule: #a9bdd8;
+  --rule-strong: #c0574a;
+  --print: #8c3b2e;
+  --ink: #2b1d13;
+  --ribbon-red: #9e2418;
+  --pencil: #3d5a80;
+  --font-type: "Petit Formal Script", "Snell Roundhand", cursive;
+  --font-type-alt: "IM Fell English", Georgia, serif;
+  --font-print: "IM Fell English SC", Georgia, serif;
+}
+html[data-modo="1895"] body {
+  background:
+    repeating-linear-gradient(91deg, rgba(0,0,0,.07) 0 2px, transparent 2px 9px, rgba(255,220,170,.025) 9px 12px, transparent 12px 23px),
+    radial-gradient(ellipse at 50% 0%, #4d3424 0%, var(--desk) 50%, var(--desk-2) 100%);
+  background-color: var(--desk);
+}
+html[data-modo="1895"] .holes { display: none; }
+html[data-modo="1895"] .sheet {
+  padding-left: 44px;
+  border-radius: 1px 3px 3px 1px;
+  background-image:
+    linear-gradient(90deg, rgba(80,50,15,.30) 0, rgba(80,50,15,.08) 14px, rgba(80,50,15,0) 30px),
+    radial-gradient(ellipse at 50% 40%, rgba(255,255,255,0) 50%, rgba(150,100,35,.30) 100%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .42 0 0 0 0 .34 0 0 0 0 .16 0 0 0 .10 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+html[data-modo="1895"] .key { color: #e3d2aa; font-size: 13px; letter-spacing: .03em; text-transform: none; }
+html[data-modo="1895"] .key .cap {
+  font-family: "IM Fell English", Georgia, serif; font-weight: 400; color: #2b1d13;
+  background: radial-gradient(circle at 42% 34%, #f6e2a0 0%, #cfa74c 42%, #8a6424 100%);
+  border-color: #6b4c1c;
+  box-shadow: 0 0 0 1px #3a2a10, 0 4px 0 #24180a, 0 6px 8px rgba(0,0,0,.5), inset 0 2px 2px rgba(255,255,255,.4);
+}
+html[data-modo="1895"] .key.on .cap { color: #7d140c; box-shadow: 0 0 0 2px #e9c46a, 0 4px 0 #24180a, 0 6px 8px rgba(0,0,0,.5), inset 0 2px 2px rgba(255,255,255,.4); }
+html[data-modo="1895"] .key.red .cap { color: #9e2418; }
+html[data-modo="1895"] .printed { letter-spacing: .05em; font-size: 14px; text-transform: none; }
+html[data-modo="1895"] .titlefield input { font-family: "Pinyon Script", cursive; font-size: 30px; padding-bottom: 0; }
+html[data-modo="1895"] .meta input { font-size: 17px; width: 122px; }
+html[data-modo="1895"] .grid { font-size: 16px; }
+html[data-modo="1895"] .grid th { font-size: 14px; letter-spacing: .04em; }
+html[data-modo="1895"] .grid td { border-right-color: rgba(192,87,74,.55); border-bottom-color: rgba(110,140,190,.55); }
+html[data-modo="1895"] .grid td:nth-child(3), html[data-modo="1895"] .grid td:nth-child(6) { border-right: 3px double var(--rule-strong); }
+html[data-modo="1895"] .grid td .ink { padding-bottom: 3px; line-height: 1.25; }
+html[data-modo="1895"] .grid td.b .ink { text-shadow: .45px 0 0 currentColor, 0 .35px 0 currentColor; }
+html[data-modo="1895"] .grid td.u .ink > em { text-decoration-color: var(--ribbon-red); text-decoration-thickness: 1px; }
+html[data-modo="1895"] .grid td.d .ink > em { border-bottom: 3px double var(--ribbon-red); }
+html[data-modo="1895"] .grid td.c::before {
+  inset: 4px 3px 3px 3px; border-radius: 40%;
+  background: radial-gradient(ellipse at 50% 55%, rgba(255,252,240,.9) 0%, rgba(255,250,235,.5) 55%, rgba(255,250,235,0) 100%);
+  box-shadow: none; filter: blur(.5px);
+}
+html[data-modo="1895"] .grid td input.ed { font-size: 16px; background: rgba(247,240,220,.96); caret-color: var(--ink); }
+
 @media (max-width: 700px) {
   .sheet { padding: 18px 12px 16px 40px; }
   .holes { left: 10px; }
@@ -151,11 +211,15 @@ table.grid { border-collapse: collapse; table-layout: fixed; font-family: var(--
 <div class="wrap">
 
   <div class="keys" role="toolbar" aria-label="Ferramentas">
+    <div class="keygroup" role="group" aria-label="Época da folha">
+      <button class="key" id="k-1940" title="Modo 1940: folha batida à máquina de escrever"><span class="cap">40</span>1940</button>
+      <button class="key" id="k-1895" title="Modo 1895: livro-caixa escrito à mão, a pena"><span class="cap">95</span>1895</button>
+    </div>
     <div class="keygroup">
-      <button class="key" id="k-b" title="Negrito por batida dupla (Ctrl+B)"><span class="cap">N</span>Negrito</button>
+      <button class="key" id="k-b" title="Negrito: batida dupla na máquina, traço carregado na pena (Ctrl+B)"><span class="cap">N</span>Negrito</button>
       <button class="key" id="k-u" title="Sublinhado (Ctrl+U)"><span class="cap">S</span>Sublinha</button>
       <button class="key" id="k-d" title="Traço duplo de total"><span class="cap">=</span>Total</button>
-      <button class="key red" id="k-r" title="Alternar fita vermelha na célula"><span class="cap">V</span>Fita verm.</button>
+      <button class="key red" id="k-r" title="Alternar vermelho na célula"><span class="cap">V</span><span class="m40">Fita verm.</span><span class="m95">Tinta verm.</span></button>
     </div>
     <div class="keygroup">
       <button class="key" id="k-undo" title="Desfazer (Ctrl+Z)"><span class="cap">↶</span>Desfazer</button>
@@ -192,8 +256,8 @@ table.grid { border-collapse: collapse; table-layout: fixed; font-family: var(--
     </div>
 
     <div class="foot">
-      <p>Fórmulas começam com <code>=</code> e usam <code>;</code> entre argumentos: <code>=SOMA(C5:C12)</code>, <code>=MÉDIA(…)</code>, <code>=MÁX(…)</code>, <code>=MÍN(…)</code>, <code>=CONT(…)</code>, <code>=ARRED(x;2)</code>, <code>=SE(cond;a;b)</code>, <code>=ABS(x)</code>. Números no padrão brasileiro (<code>1.234,56</code>); negativos saem na fita vermelha. Digite direto na célula; Enter desce, Tab avança, Esc desiste, Del apaga, F2 corrige. Para marcar várias células, arraste o mouse ou use Shift+clique e Shift+setas (Ctrl+A marca a folha toda); negrito, sublinhado, total, fita vermelha, Del e Ctrl+C valem para a faixa inteira. Ao bater por cima de algo já escrito, fica a mancha de corretivo; apagar devolve a cor do papel. Dá para colar um bloco copiado do Excel.</p>
-      <div class="stamp">Bloco colunar · 8 colunas · 30 linhas<br>Salvo neste navegador</div>
+      <p>Fórmulas começam com <code>=</code> e usam <code>;</code> entre argumentos: <code>=SOMA(C5:C12)</code>, <code>=MÉDIA(…)</code>, <code>=MÁX(…)</code>, <code>=MÍN(…)</code>, <code>=CONT(…)</code>, <code>=ARRED(x;2)</code>, <code>=SE(cond;a;b)</code>, <code>=ABS(x)</code>. Números no padrão brasileiro (<code>1.234,56</code>); negativos saem <span class="m40">na fita vermelha</span><span class="m95">em tinta vermelha</span>. Digite direto na célula; Enter desce, Tab avança, Esc desiste, Del apaga, F2 corrige. Para marcar várias células, arraste o mouse ou use Shift+clique e Shift+setas (Ctrl+A marca a folha toda); negrito, sublinhado, total, fita vermelha, Del e Ctrl+C valem para a faixa inteira. <span class="m40">Ao bater por cima de algo já escrito, fica a mancha de corretivo</span><span class="m95">Ao escrever por cima de algo já lançado, fica a marca da raspagem</span>; apagar devolve a cor do papel. As teclas 1940 e 1895 trocam a época da folha sem mexer no conteúdo. Dá para colar um bloco copiado do Excel.</p>
+      <div class="stamp"><span class="m40">Bloco colunar</span><span class="m95">Livro-caixa pautado</span> · 8 colunas · 30 linhas<br>Salvo neste navegador</div>
     </div>
   </div>
 </div>
@@ -205,6 +269,8 @@ table.grid { border-collapse: collapse; table-layout: fixed; font-family: var(--
   const ROWS = 30;
   const WIDTHS = [86, 310, 128, 128, 128, 118, 118, 118];
   const KEY = "planilha-datilografada-v1";
+  const MODEKEY = "planilha-modo";
+  let modo = "1940";
 
   let state = null;   // {title, folha, data, cells:{A1:{v,b,u,d,r,c}}}
   let sel = "A1";
@@ -215,24 +281,49 @@ table.grid { border-collapse: collapse; table-layout: fixed; font-family: var(--
   let sound = false;
 
   /* ---------------- exemplo ---------------- */
-  function demo() {
+  const DEMOS = {
+    "1940": {
+      cab: "MOVIMENTO DE CAIXA - ESCRITÓRIO",
+      col: ["DATA", "HISTÓRICO", "ENTRADAS", "SAÍDAS", "SALDO"],
+      rows: [
+        ["01/11", "Saldo anterior", "", "", "4.250,00"],
+        ["03/11", "Honorários - Cia. Paulista de Tecidos", "1.800,00", ""],
+        ["05/11", "Aluguel da sala - R. Líbero Badaró", "", "950,00"],
+        ["08/11", "Papelaria e fitas para máquina", "", "87,40"],
+        ["12/11", "Honorários - Armazéns Gerais Santos", "2.400,00", ""],
+        ["15/11", "Ordenado do contínuo", "", "620,00"],
+        ["20/11", "Telefone e telegramas", "", "143,90"],
+        ["25/11", "Custas de cartório", "", "312,50"],
+        ["28/11", "Arquivo de aço, 4 gavetas", "", "6.900,00"],
+      ],
+      tot: "TOTAIS DO MÊS", med: "Média das saídas", max: "Maior saída", cont: "Lançamentos no mês",
+      title: "Livro-caixa - Novembro", data: "30/11/1940",
+    },
+    "1895": {
+      cab: "Movimento de Caixa do Escriptorio",
+      col: ["Data", "Historico", "Entradas", "Sahidas", "Saldo"],
+      rows: [
+        ["1/11", "Saldo do mez anterior", "", "", "1.250,00"],
+        ["4/11", "Honorarios — Cia. Paulista", "800,00", ""],
+        ["6/11", "Aluguel do escriptorio", "", "180,00"],
+        ["9/11", "Pennas, tinta e mata-borrão", "", "12,40"],
+        ["13/11", "Honorarios — Casa Commissaria", "1.200,00", ""],
+        ["16/11", "Ordenado do caixeiro", "", "95,00"],
+        ["21/11", "Telegrammas e sellos", "", "23,90"],
+        ["26/11", "Custas do cartorio", "", "61,50"],
+        ["29/11", "Estante de vinhatico", "", "2.900,00"],
+      ],
+      tot: "Sommas do mez", med: "Media das sahidas", max: "Maior sahida", cont: "Lançamentos no mez",
+      title: "Livro-caixa — Novembro", data: "30/11/1895",
+    },
+  };
+  function demo(m) {
+    const D = DEMOS[m || modo] || DEMOS["1940"];
     const c = {};
     const put = (id, v, s) => { c[id] = Object.assign({ v }, s || {}); };
-    put("B1", "MOVIMENTO DE CAIXA - ESCRITÓRIO", { b: 1 });
-    ["A3:DATA", "B3:HISTÓRICO", "C3:ENTRADAS", "D3:SAÍDAS", "E3:SALDO"].forEach(x => {
-      const [id, v] = x.split(":"); put(id, v, { b: 1, u: 1 });
-    });
-    const rows = [
-      ["01/11", "Saldo anterior", "", "", "4.250,00"],
-      ["03/11", "Honorários - Cia. Paulista de Tecidos", "1.800,00", ""],
-      ["05/11", "Aluguel da sala - R. Líbero Badaró", "", "950,00"],
-      ["08/11", "Papelaria e fitas para máquina", "", "87,40"],
-      ["12/11", "Honorários - Armazéns Gerais Santos", "2.400,00", ""],
-      ["15/11", "Ordenado do contínuo", "", "620,00"],
-      ["20/11", "Telefone e telegramas", "", "143,90"],
-      ["25/11", "Custas de cartório", "", "312,50"],
-      ["28/11", "Arquivo de aço, 4 gavetas", "", "6.900,00"],
-    ];
+    put("B1", D.cab, { b: 1 });
+    ["A", "B", "C", "D", "E"].forEach((col, i) => put(col + "3", D.col[i], { b: 1, u: 1 }));
+    const rows = D.rows;
     rows.forEach((r, i) => {
       const n = 4 + i;
       if (r[0]) put("A" + n, r[0]);
@@ -242,19 +333,19 @@ table.grid { border-collapse: collapse; table-layout: fixed; font-family: var(--
       if (i === 0) put("E4", r[4]);
       else put("E" + n, `=E${n - 1}+C${n}-D${n}`);
     });
-    put("B14", "TOTAIS DO MÊS", { b: 1 });
+    put("B14", D.tot, { b: 1 });
     put("C14", "=SOMA(C5:C12)", { b: 1, d: 1 });
     put("D14", "=SOMA(D5:D12)", { b: 1, d: 1 });
     put("E14", "=E12", { b: 1, d: 1 });
-    put("B16", "Média das saídas");
+    put("B16", D.med);
     put("D16", "=MÉDIA(D5:D12)");
-    put("B17", "Maior saída");
+    put("B17", D.max);
     put("D17", "=MÁX(D5:D12)");
-    put("B18", "Lançamentos no mês");
+    put("B18", D.cont);
     put("D18", "=CONT(C5:D12)");
     // uma correção de exemplo, com corretivo
     c["D7"].c = 1;
-    return { title: "Livro-caixa - Novembro", folha: "001", data: "30/11/1962", cells: c };
+    return { title: D.title, folha: "001", data: D.data, cells: c };
   }
 
   /* ---------------- persistência ---------------- */
@@ -384,6 +475,13 @@ table.grid { border-collapse: collapse; table-layout: fixed; font-family: var(--
   function hash(str) { let h = 2166136261; for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
   const esc = ch => ch === "&" ? "&amp;" : ch === "<" ? "&lt;" : ch === ">" ? "&gt;" : ch;
   function inkHTML(text, seed) {
+    if (modo === "1895") {
+      const h = hash(seed + ":" + text);
+      const o = (0.80 + (h % 19) / 100).toFixed(2);
+      let t = "";
+      for (const ch of text) t += esc(ch);
+      return '<span style="--o:' + o + '">' + t + "</span>";
+    }
     let out = "";
     for (let i = 0; i < text.length; i++) {
       const ch = text[i];
@@ -681,7 +779,7 @@ table.grid { border-collapse: collapse; table-layout: fixed; font-family: var(--
     }
     clearTimeout(armed); armed = null; newLbl.textContent = "Folha nova";
     snapshot(); state = { title: "", folha: "", data: "", cells: {} };
-    save(); syncMeta(); select("A1"); renderAll(); ding(); toast("Folha nova no rolo.");
+    save(); syncMeta(); select("A1"); renderAll(); ding(); toast(modo === "1895" ? "Folha nova no livro." : "Folha nova no rolo.");
   };
   document.getElementById("k-copy").onclick = () => {
     memo = new Map();
@@ -721,6 +819,17 @@ table.grid { border-collapse: collapse; table-layout: fixed; font-family: var(--
   function tick() {
     if (!sound) return;
     const a = ac(); if (!a) return;
+    if (modo === "1895") {
+      const len = Math.floor(a.sampleRate * 0.09);
+      const buf = a.createBuffer(1, len, a.sampleRate);
+      const d = buf.getChannelData(0);
+      for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.sin(Math.PI * i / len) * (0.6 + 0.4 * Math.sin(i / 37));
+      const src = a.createBufferSource(); src.buffer = buf;
+      const f = a.createBiquadFilter(); f.type = "highpass"; f.frequency.value = 2800 + Math.random() * 1500;
+      const g = a.createGain(); g.gain.value = 0.16;
+      src.connect(f); f.connect(g); g.connect(a.destination); src.start();
+      return;
+    }
     const len = Math.floor(a.sampleRate * 0.035);
     const buf = a.createBuffer(1, len, a.sampleRate);
     const d = buf.getChannelData(0);
@@ -731,7 +840,7 @@ table.grid { border-collapse: collapse; table-layout: fixed; font-family: var(--
     src.connect(f); f.connect(g); g.connect(a.destination); src.start();
   }
   function ding() {
-    if (!sound) return;
+    if (!sound || modo === "1895") return;
     const a = ac(); if (!a) return;
     const t = a.currentTime;
     [[2093, 0.22], [4186, 0.06], [3136, 0.04]].forEach(([fr, vol]) => {
@@ -749,12 +858,42 @@ table.grid { border-collapse: collapse; table-layout: fixed; font-family: var(--
     clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.remove("show"), 1800);
   }
 
+  /* ---------------- época ---------------- */
+  function applyModo(m) {
+    const antes = modo;
+    modo = m === "1895" ? "1895" : "1940";
+    document.documentElement.dataset.modo = modo;
+    document.title = modo === "1895" ? "Planilha Manuscrita" : "Planilha Datilografada";
+    document.getElementById("k-1940").classList.toggle("on", modo === "1940");
+    document.getElementById("k-1895").classList.toggle("on", modo === "1895");
+    try { localStorage.setItem(MODEKEY, modo); } catch (e) {}
+    try { history.replaceState(null, "", "#" + modo); } catch (e) {}
+    // folha de exemplo intocada acompanha a época
+    if (state && antes !== modo && JSON.stringify(state) === JSON.stringify(demo(antes))) {
+      state = demo(modo); save(); syncMeta();
+    }
+    if (state) renderAll();
+  }
+  document.getElementById("k-1940").addEventListener("click", () => { if (modo !== "1940") { applyModo("1940"); toast("1940: à máquina."); } });
+  document.getElementById("k-1895").addEventListener("click", () => { if (modo !== "1895") { applyModo("1895"); toast("1895: à pena."); } });
+
   /* ---------------- início ---------------- */
+  {
+    const h = location.hash.replace("#", "");
+    let m = null;
+    if (h === "1895" || h === "1940") m = h;
+    else { try { m = localStorage.getItem(MODEKEY); } catch (e) {} }
+    modo = m === "1895" ? "1895" : "1940";
+  }
   state = load();
+  {
+    const outro = modo === "1895" ? "1940" : "1895";
+    if (JSON.stringify(state) === JSON.stringify(demo(outro))) state = demo(modo);
+  }
   build();
   syncMeta();
   sel = "E12";
-  renderAll();
+  applyModo(modo);
 })();
 </script>
 </body>

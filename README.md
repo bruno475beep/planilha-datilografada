@@ -4,6 +4,11 @@ Uma planilha no navegador com cara de bloco colunar batido à máquina: fita bic
 
 **Abrir:** https://bruno475beep.github.io/planilha-datilografada/
 
+Duas épocas, trocadas pelas teclas do alto (o conteúdo da folha é o mesmo):
+
+- **1940** — folha de bloco colunar batida à máquina: fita preta e vermelha, mancha de corretivo. Link direto: [#1940](https://bruno475beep.github.io/planilha-datilografada/#1940)
+- **1895** — livro-caixa escrito à mão, a pena: letra caligráfica, pauta azul e vermelha, tinta vermelha para negativos, marca de raspagem nas correções e ortografia da época no exemplo. Link direto: [#1895](https://bruno475beep.github.io/planilha-datilografada/#1895)
+
 - Fórmulas em português, com `;` entre argumentos: `=SOMA(C5:C12)`, `=MÉDIA(…)`, `=MÁX(…)`, `=MÍN(…)`, `=CONT(…)`, `=ARRED(x;2)`, `=SE(cond;a;b)`, `=ABS(x)`.
 - Números no padrão brasileiro (`1.234,56`); negativos saem em vermelho.
 - Seleção de várias células: arraste o mouse, Shift+clique ou Shift+setas (Ctrl+A marca tudo). Negrito, sublinhado, total, fita vermelha, Del e Ctrl+C valem para a faixa.
@@ -11,4 +16,4 @@ Uma planilha no navegador com cara de bloco colunar batido à máquina: fita bic
 - Cola blocos copiados do Excel e copia de volta.
 - Tudo fica salvo só no seu navegador (localStorage). Não há servidor, conta nem rastreamento.
 
-Um arquivo só (`index.html`), sem dependências além das fontes do Google Fonts (Special Elite, Courier Prime, Barlow Condensed).
+Um arquivo só (`index.html`), sem dependências além das fontes do Google Fonts (1940: Special Elite, Courier Prime, Barlow Condensed; 1895: Petit Formal Script, Pinyon Script, IM Fell English).
