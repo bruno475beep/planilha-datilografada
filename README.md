@@ -14,6 +14,9 @@ Duas épocas, trocadas pelas teclas do alto (o conteúdo da folha é o mesmo):
 - Seleção de várias células: arraste o mouse, Shift+clique ou Shift+setas (Ctrl+A marca tudo). Negrito, sublinhado, total, fita vermelha, Del e Ctrl+C valem para a faixa.
 - Apagar uma célula devolve a cor do papel; só bater por cima deixa a mancha de corretivo.
 - Cola blocos copiados do Excel e copia de volta.
+- **Documentos ▾**: as 5 folhas mais recentes ficam guardadas sozinhas neste navegador (IndexedDB); fixe com ★ as que quiser manter sempre, apague com ✕.
+- **Exportar ▾**: PDF (a folha como aparece, em A4) ou Excel `.xlsx` (valores, fórmulas convertidas para o Excel, negrito, sublinhado, vermelho e traço duplo de total).
+- O teclado do alto fica fixo ao rolar a folha e se recolhe com ▴ ou Ctrl+\.
 - Tudo fica salvo só no seu navegador (localStorage). Não há servidor, conta nem rastreamento.
 
-Um arquivo só (`index.html`), sem dependências além das fontes do Google Fonts (1940: Special Elite, Courier Prime, Barlow Condensed; 1895: Petit Formal Script, Pinyon Script, IM Fell English).
+Um arquivo só (`index.html`). As bibliotecas de exportação (html2canvas, jsPDF e ExcelJS, via cdnjs) só são baixadas quando você exporta. Usa as fontes do Google Fonts (1940: Special Elite, Courier Prime, Barlow Condensed; 1895: Petit Formal Script, Pinyon Script, IM Fell English).

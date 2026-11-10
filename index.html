@@ -35,7 +35,7 @@ body {
   color: var(--ink);
   font-family: var(--font-type);
   min-height: 100%;
-  padding: 20px 16px 48px;
+  padding: 0 16px 48px;
 }
 .wrap { max-width: 1260px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
 
@@ -137,6 +137,70 @@ table.grid { border-collapse: collapse; table-layout: fixed; font-family: var(--
 }
 .toast.show { opacity: 1; }
 
+/* ---------- barra fixa e retrátil ---------- */
+.bar {
+  position: sticky; top: 0; z-index: 30;
+  margin: 0 -16px 18px; padding: 12px 16px 10px;
+  background: linear-gradient(180deg, var(--desk-2) 0%, var(--desk) 100%);
+  box-shadow: 0 10px 18px -8px rgba(0,0,0,.7);
+}
+.bar.recolhida { display: none; }
+.showbar {
+  position: fixed; top: 0; right: 16px; z-index: 31; cursor: pointer;
+  font-family: var(--font-print); font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+  color: #f1ead3; background: var(--desk-2); border: 1px solid rgba(255,255,255,.14); border-top: 0;
+  border-radius: 0 0 8px 8px; padding: 5px 12px 6px; box-shadow: 0 4px 10px rgba(0,0,0,.5);
+}
+.showbar[hidden] { display: none; }
+body.semtopo { padding-top: 28px; }
+
+/* ---------- menus (fichas de papel) ---------- */
+.popwrap { position: relative; display: inline-flex; }
+.pop {
+  position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%); z-index: 40;
+  min-width: 220px; display: flex; flex-direction: column; padding: 6px;
+  background-color: var(--paper); color: var(--ink); border-radius: 2px;
+  box-shadow: 0 14px 30px rgba(0,0,0,.55), 0 2px 5px rgba(0,0,0,.35);
+  font-family: var(--font-type-alt); font-size: 14px; text-align: left;
+}
+.pop[hidden] { display: none; }
+.pop button {
+  border: 0; border-bottom: 1px solid var(--rule); background: transparent; color: inherit; font: inherit;
+  text-align: left; min-height: 36px; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 0 10px; cursor: pointer;
+}
+.pop button:hover, .pop button:focus-visible { background: rgba(58,78,166,.10); outline: none; }
+.pop .ext { font-family: var(--font-print); color: var(--print); font-size: 12px; letter-spacing: .05em; }
+.docmenu { min-width: 310px; max-width: min(390px, calc(100vw - 32px)); }
+.docrow { display: flex; align-items: stretch; border-bottom: 1px solid var(--rule); }
+.docrow.cur { background: rgba(58,78,166,.08); }
+.pop .docrow button { border-bottom: 0; }
+.pop .docrow .docopen { flex: 1; min-width: 0; flex-direction: column; align-items: flex-start; justify-content: center; padding: 6px 10px; gap: 2px; }
+.docopen .nm { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: var(--font-type); font-size: 15px; }
+.pop .docrow .docpin, .pop .docrow .docdel { width: 36px; padding: 0; justify-content: center; flex: none; font-size: 15px; color: var(--print); }
+.pop .docrow .docpin[aria-pressed="true"] { color: var(--ribbon-red); }
+.pop .docrow .docdel.warn { width: auto; padding: 0 8px; color: var(--ribbon-red); font-size: 12px; }
+.docempty { padding: 10px; }
+.docnote { font-size: 12px; color: #5a5442; padding: 8px 10px 4px; line-height: 1.45; }
+#namedlg {
+  border: 0; border-radius: 2px; background: var(--paper); color: var(--ink); padding: 20px 22px 18px;
+  width: min(420px, calc(100vw - 32px)); box-shadow: 0 18px 50px rgba(0,0,0,.6); font-family: var(--font-type-alt);
+}
+#namedlg::backdrop { background: rgba(10,12,12,.55); }
+#namedlg h2 { margin: 0 0 12px; font-family: var(--font-type); font-weight: 400; font-size: 22px; }
+.namerow { display: flex; align-items: baseline; gap: 4px; margin: 6px 0 18px; }
+.namerow input { flex: 1; min-width: 0; border: 0; border-bottom: 1px dotted var(--rule-strong); background: transparent; font-family: var(--font-type); font-size: 17px; color: var(--ink); padding: 3px 2px; }
+.namerow input:focus { outline: none; border-bottom-color: var(--pencil); }
+.namerow span { font-family: var(--font-print); color: var(--print); }
+.dlgbtns { display: flex; justify-content: flex-end; gap: 10px; }
+.dlgbtns button { font-family: var(--font-print); text-transform: uppercase; letter-spacing: .08em; font-size: 13px; padding: 7px 14px; border: 1px solid var(--rule-strong); background: transparent; color: var(--ink); cursor: pointer; border-radius: 2px; }
+.dlgbtns .primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+html.printing .grid td.sel { outline: none; }
+html.printing .grid td.sel::after { display: none; }
+html.printing .grid td.rng { background: none; }
+html.printing .fxbar, html.printing .foot p { display: none; }
+html.printing .foot { grid-template-columns: 1fr; }
+
 /* ---------- modo 1895: livro-caixa escrito à mão, pena e tinta ferrogálica ---------- */
 .m95 { display: none; }
 html[data-modo="1895"] .m40 { display: none; }
@@ -208,8 +272,7 @@ html[data-modo="1895"] .grid td input.ed { font-size: 16px; background: rgba(247
 </style>
 </head>
 <body>
-<div class="wrap">
-
+<header class="bar" id="bar">
   <div class="keys" role="toolbar" aria-label="Ferramentas">
     <div class="keygroup" role="group" aria-label="Época da folha">
       <button class="key" id="k-1940" title="Modo 1940: folha batida à máquina de escrever"><span class="cap">40</span>1940</button>
@@ -227,10 +290,23 @@ html[data-modo="1895"] .grid td input.ed { font-size: 16px; background: rgba(247
       <button class="key" id="k-snd" title="Som das teclas"><span class="cap">♪</span><span id="snd-lbl">Som: não</span></button>
     </div>
     <div class="keygroup">
-      <button class="key" id="k-demo" title="Recarregar a folha de exemplo"><span class="cap">E</span>Exemplo</button>
-      <button class="key" id="k-new" title="Folha em branco"><span class="cap">✕</span><span id="new-lbl">Folha nova</span></button>
+      <span class="popwrap"><button class="key" id="k-docs" aria-haspopup="menu" aria-expanded="false" aria-controls="docmenu" title="As folhas recentes, guardadas neste navegador"><span class="cap">▤</span>Documentos ▾</button>
+        <div class="pop docmenu" id="docmenu" role="menu" hidden></div></span>
+      <span class="popwrap"><button class="key" id="k-exp" aria-haspopup="menu" aria-expanded="false" aria-controls="expmenu" title="Salvar a folha como arquivo"><span class="cap">⇩</span>Exportar ▾</button>
+        <div class="pop" id="expmenu" role="menu" hidden>
+          <button role="menuitem" data-kind="pdf" title="A folha como aparece aqui, numa página A4">PDF <span class="ext">.pdf</span></button>
+          <button role="menuitem" data-kind="xlsx" title="Para continuar no Excel: valores, fórmulas, negrito, sublinhado, vermelho e traço de total">Excel <span class="ext">.xlsx</span></button>
+        </div></span>
+      <button class="key" id="k-demo" title="Recarregar a folha de exemplo; a atual fica em Documentos"><span class="cap">E</span>Exemplo</button>
+      <button class="key" id="k-new" title="Folha em branco; a atual fica em Documentos"><span class="cap">✕</span>Folha nova</button>
+    </div>
+    <div class="keygroup">
+      <button class="key" id="k-hide" title="Recolher o teclado (Ctrl+\)" aria-label="Recolher o teclado"><span class="cap">▴</span>Recolher</button>
     </div>
   </div>
+</header>
+<button class="showbar" id="showbar" title="Mostrar o teclado (Ctrl+\)" hidden>▾ Teclado</button>
+<div class="wrap">
 
   <div class="sheet">
     <div class="holes" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -256,11 +332,19 @@ html[data-modo="1895"] .grid td input.ed { font-size: 16px; background: rgba(247
     </div>
 
     <div class="foot">
-      <p>Fórmulas começam com <code>=</code> e usam <code>;</code> entre argumentos: <code>=SOMA(C5:C12)</code>, <code>=MÉDIA(…)</code>, <code>=MÁX(…)</code>, <code>=MÍN(…)</code>, <code>=CONT(…)</code>, <code>=ARRED(x;2)</code>, <code>=SE(cond;a;b)</code>, <code>=ABS(x)</code>. Números no padrão brasileiro (<code>1.234,56</code>); negativos saem <span class="m40">na fita vermelha</span><span class="m95">em tinta vermelha</span>. Digite direto na célula; Enter desce, Tab avança, Esc desiste, Del apaga, F2 corrige. Para marcar várias células, arraste o mouse ou use Shift+clique e Shift+setas (Ctrl+A marca a folha toda); negrito, sublinhado, total, fita vermelha, Del e Ctrl+C valem para a faixa inteira. <span class="m40">Ao bater por cima de algo já escrito, fica a mancha de corretivo</span><span class="m95">Ao escrever por cima de algo já lançado, fica a marca da raspagem</span>; apagar devolve a cor do papel. As teclas 1940 e 1895 trocam a época da folha sem mexer no conteúdo. Dá para colar um bloco copiado do Excel.</p>
+      <p>Fórmulas começam com <code>=</code> e usam <code>;</code> entre argumentos: <code>=SOMA(C5:C12)</code>, <code>=MÉDIA(…)</code>, <code>=MÁX(…)</code>, <code>=MÍN(…)</code>, <code>=CONT(…)</code>, <code>=ARRED(x;2)</code>, <code>=SE(cond;a;b)</code>, <code>=ABS(x)</code>. Números no padrão brasileiro (<code>1.234,56</code>); negativos saem <span class="m40">na fita vermelha</span><span class="m95">em tinta vermelha</span>. Digite direto na célula; Enter desce, Tab avança, Esc desiste, Del apaga, F2 corrige. Para marcar várias células, arraste o mouse ou use Shift+clique e Shift+setas (Ctrl+A marca a folha toda); negrito, sublinhado, total, fita vermelha, Del e Ctrl+C valem para a faixa inteira. <span class="m40">Ao bater por cima de algo já escrito, fica a mancha de corretivo</span><span class="m95">Ao escrever por cima de algo já lançado, fica a marca da raspagem</span>; apagar devolve a cor do papel. As teclas 1940 e 1895 trocam a época da folha sem mexer no conteúdo. Dá para colar um bloco copiado do Excel. As folhas ficam guardadas sozinhas em <b>Documentos</b> (as 5 mais recentes e as fixadas com ★); <b>Exportar</b> gera PDF ou Excel (.xlsx, com as fórmulas). O teclado do alto fica sempre à mão e se recolhe com ▴ ou Ctrl+\.</p>
       <div class="stamp"><span class="m40">Bloco colunar</span><span class="m95">Livro-caixa pautado</span> · 8 colunas · 30 linhas<br>Salvo neste navegador</div>
     </div>
   </div>
 </div>
+<dialog id="namedlg" aria-labelledby="namettl">
+  <form method="dialog">
+    <h2 id="namettl">Salvar como</h2>
+    <label class="printed" for="fname">Nome do arquivo</label>
+    <div class="namerow"><input id="fname" type="text" autocomplete="off" spellcheck="false"><span id="fext">.pdf</span></div>
+    <div class="dlgbtns"><button type="button" id="fcancel">Cancelar</button><button type="submit" class="primary">Salvar</button></div>
+  </form>
+</dialog>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -353,7 +437,7 @@ html[data-modo="1895"] .grid td input.ed { font-size: 16px; background: rgba(247
     try { const s = localStorage.getItem(KEY); if (s) { const o = JSON.parse(s); if (o && o.cells) return o; } } catch (e) {}
     return demo();
   }
-  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} shelve(); }
   function snapshot() { undo.push(JSON.stringify(state)); if (undo.length > 120) undo.shift(); }
 
   /* ---------------- valores ---------------- */
@@ -685,6 +769,8 @@ html[data-modo="1895"] .grid td input.ed { font-size: 16px; background: rgba(247
   }
 
   document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && POPS.some(([, p]) => !$(p).hidden)) { e.preventDefault(); closePops(); return; }
+    if ((e.ctrlKey || e.metaKey) && e.key === "\\") { e.preventDefault(); setBar(bar.classList.contains("recolhida")); return; }
     if (editing) return;
     const a = document.activeElement;
     if (a && (a.tagName === "INPUT" || a.tagName === "TEXTAREA")) return;
@@ -768,18 +854,16 @@ html[data-modo="1895"] .grid td input.ed { font-size: 16px; background: rgba(247
   document.getElementById("k-d").onclick = () => toggleStyle("d");
   document.getElementById("k-r").onclick = () => toggleStyle("r");
   document.getElementById("k-undo").onclick = doUndo;
-  document.getElementById("k-demo").onclick = () => { snapshot(); state = demo(); save(); syncMeta(); renderAll(); toast("Folha de exemplo recolocada."); };
-  const newBtn = document.getElementById("k-new"), newLbl = document.getElementById("new-lbl");
-  let armed = null;
-  newBtn.onclick = () => {
-    if (!armed) {
-      newLbl.textContent = "Confirmar?";
-      armed = setTimeout(() => { newLbl.textContent = "Folha nova"; armed = null; }, 3000);
-      return;
-    }
-    clearTimeout(armed); armed = null; newLbl.textContent = "Folha nova";
+  document.getElementById("k-demo").onclick = async () => {
+    await shelve(true);
+    snapshot(); state = demo(); anchor = null; save(); syncMeta(); renderAll(); toast("Folha de exemplo recolocada.");
+  };
+  document.getElementById("k-new").onclick = async () => {
+    await shelve(true);
+    const guardada = !isBlank(state) && !isDemo(state);
     snapshot(); state = { title: "", folha: "", data: "", cells: {} };
-    save(); syncMeta(); select("A1"); renderAll(); ding(); toast(modo === "1895" ? "Folha nova no livro." : "Folha nova no rolo.");
+    anchor = null; save(); syncMeta(); select("A1"); renderAll(); ding();
+    toast(guardada ? "Folha nova. A anterior ficou em Documentos." : (modo === "1895" ? "Folha nova no livro." : "Folha nova no rolo."));
   };
   document.getElementById("k-copy").onclick = () => {
     memo = new Map();
@@ -858,6 +942,264 @@ html[data-modo="1895"] .grid td input.ed { font-size: 16px; background: rgba(247
     clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.remove("show"), 1800);
   }
 
+  /* ---------------- barra fixa e retrátil ---------------- */
+  const $ = id => document.getElementById(id);
+  const BARKEY = "planilha-barra";
+  const bar = $("bar"), showbar = $("showbar");
+  function setBar(open, persist) {
+    bar.classList.toggle("recolhida", !open);
+    showbar.hidden = open;
+    document.body.classList.toggle("semtopo", !open);
+    if (!open) closePops();
+    if (persist !== false) { try { localStorage.setItem(BARKEY, open ? "1" : "0"); } catch (e) {} }
+  }
+  $("k-hide").addEventListener("click", () => setBar(false));
+  showbar.addEventListener("click", () => setBar(true));
+
+  /* ---------------- menus ---------------- */
+  const POPS = [["k-docs", "docmenu"], ["k-exp", "expmenu"]];
+  function closePops() { POPS.forEach(([b, p]) => { $(p).hidden = true; $(b).setAttribute("aria-expanded", "false"); }); }
+  POPS.forEach(([b, p]) => $(b).addEventListener("click", async () => {
+    const abrir = $(p).hidden;
+    closePops();
+    if (!abrir) return;
+    if (p === "docmenu") { await shelve(true); await listDocs(); }
+    const el = $(p);
+    el.hidden = false; $(b).setAttribute("aria-expanded", "true");
+    el.style.transform = "";
+    const r = el.getBoundingClientRect();
+    let dx = 0;
+    if (r.left < 8) dx = 8 - r.left; else if (r.right > innerWidth - 8) dx = innerWidth - 8 - r.right;
+    if (dx) el.style.transform = "translateX(calc(-50% + " + dx + "px))";
+  }));
+  document.addEventListener("pointerdown", e => { if (!e.target.closest(".popwrap")) closePops(); });
+
+  /* ---------------- Documentos: as folhas recentes, guardadas inteiras neste navegador (IndexedDB).
+     A folha na mesa é guardada um instante depois de cada mudança; ficam as 5 mais recentes, e as fixadas sempre. */
+  const SHELF = 5;
+  const newId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+  let dbp = null;
+  function db() {
+    return dbp || (dbp = new Promise((res, rej) => {
+      const r = indexedDB.open("planilha-datilografada", 1);
+      r.onupgradeneeded = () => { if (!r.result.objectStoreNames.contains("docs")) r.result.createObjectStore("docs", { keyPath: "id" }); };
+      r.onsuccess = () => res(r.result);
+      r.onerror = () => { dbp = null; rej(r.error); };
+    }));
+  }
+  async function idb(mode, fn) {
+    const d = await db();
+    return new Promise((res, rej) => {
+      const tx = d.transaction("docs", mode), q = fn(tx.objectStore("docs"));
+      tx.oncomplete = () => res(q && q.result); tx.onerror = () => rej(tx.error);
+    });
+  }
+  const docsAll = () => idb("readonly", st => st.getAll()).then(a => a || []);
+  function isBlank(st) { return !st.title && !st.folha && !st.data && !Object.values(st.cells).some(c => c && c.v); }
+  function isDemo(st) {
+    const sem = JSON.stringify({ title: st.title, folha: st.folha, data: st.data, cells: st.cells });
+    return sem === JSON.stringify(demo("1940")) || sem === JSON.stringify(demo("1895"));
+  }
+  let shelfT = 0;
+  function shelve(now) {
+    clearTimeout(shelfT);
+    const run = async () => {
+      try {
+        if (!state || isBlank(state) || isDemo(state)) return;
+        if (!state.docId) { state.docId = newId(); try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+        const id = state.docId;
+        const all = await docsAll(), prev = all.find(d => d.id === id);
+        const copia = JSON.parse(JSON.stringify(state));
+        await idb("readwrite", st => st.put({
+          id, name: (state.title || "").trim() || "Sem título", state: copia, modo,
+          pinned: !!(prev && prev.pinned), created: prev ? prev.created : Date.now(), updated: Date.now(),
+        }));
+        if (!prev) {
+          const soltas = all.filter(d => !d.pinned && d.id !== id).sort((a, b) => b.updated - a.updated).slice(SHELF - 1);
+          for (const d of soltas) {
+            await idb("readwrite", st => st.delete(d.id));
+            toast("“" + d.name + "” saiu de Documentos, a mais antiga de " + SHELF + ". Fixe com ★ para guardar.");
+          }
+        }
+      } catch (e) {}
+    };
+    if (now) return run();
+    shelfT = setTimeout(run, 1200);
+    return Promise.resolve();
+  }
+  async function openDoc(id) {
+    await shelve(true);
+    const d = (await docsAll()).find(x => x.id === id);
+    if (!d) { toast("Essa folha não está mais aqui."); return; }
+    undo = [];
+    state = JSON.parse(JSON.stringify(d.state)); state.docId = d.id;
+    anchor = null;
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+    syncMeta(); applyModo(d.modo || modo); select("A1");
+    toast("Aberta: “" + d.name + "”");
+  }
+  async function listDocs() {
+    const m = $("docmenu");
+    let all;
+    try { all = await docsAll(); }
+    catch (e) { m.innerHTML = '<div class="docempty">Documentos precisa do armazenamento do navegador, que está bloqueado aqui. Use Exportar ▾ Excel para guardar uma cópia.</div>'; return; }
+    all.sort((a, b) => (b.pinned - a.pinned) || (b.updated - a.updated));
+    const quando = t => {
+      const d = new Date(t), hoje = new Date().toDateString() === d.toDateString();
+      return hoje ? "hoje, " + d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })
+                  : d.toLocaleDateString("pt-BR", { day: "numeric", month: "short", year: "numeric" });
+    };
+    const q = x => String(x).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+    m.innerHTML = (all.length ? all.map(d => {
+      const cur = d.id === state.docId;
+      return '<div class="docrow' + (cur ? " cur" : "") + '" data-id="' + q(d.id) + '">' +
+        '<button role="menuitem" class="docopen" title="' + q(d.name) + '"><span class="nm">' + q(d.name) + '</span><span class="ext">' +
+          (d.modo === "1895" ? "1895" : "1940") + " · " + (cur ? "na mesa agora · " : "") + quando(d.updated) + "</span></button>" +
+        '<button class="docpin" aria-pressed="' + !!d.pinned + '" title="' + (d.pinned ? "Fixada: guardada sempre. Clique para soltar" : "Fixar: guardar para sempre em Documentos") + '" aria-label="Fixar">' + (d.pinned ? "★" : "☆") + "</button>" +
+        (cur ? "" : '<button class="docdel" title="Apagar de Documentos" aria-label="Apagar">✕</button>') + "</div>";
+    }).join("") : '<div class="docempty">Nada ainda. O que você lança aqui fica guardado sozinho.</div>') +
+    '<div class="docnote">Ficam as ' + SHELF + " folhas mais recentes, e as fixadas (★) sempre. Moram só neste navegador: para uma cópia sua, use Exportar ▾ Excel.</div>";
+  }
+  $("docmenu").addEventListener("click", async ev => {
+    const row = ev.target.closest(".docrow"), b = ev.target.closest("button");
+    if (!row || !b) return;
+    const id = row.dataset.id;
+    if (b.classList.contains("docopen")) { closePops(); if (id !== state.docId) openDoc(id); return; }
+    const d = (await docsAll()).find(x => x.id === id);
+    if (!d) return listDocs();
+    if (b.classList.contains("docpin")) { d.pinned = !d.pinned; await idb("readwrite", st => st.put(d)); return listDocs(); }
+    if (b.classList.contains("docdel")) {
+      if (!b.classList.contains("warn")) {
+        b.classList.add("warn"); b.textContent = "Apagar?";
+        setTimeout(() => { if (b.isConnected) { b.classList.remove("warn"); b.textContent = "✕"; } }, 3000);
+        return;
+      }
+      await idb("readwrite", st => st.delete(id)); toast("Apagada: “" + d.name + "”"); listDocs();
+    }
+  });
+
+  /* ---------------- Exportar: PDF e Excel (bibliotecas carregadas só quando usadas) ---------------- */
+  const LIBS = {
+    h2c: "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js",
+    jspdf: "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js",
+    exceljs: "https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js",
+  };
+  const libsP = {};
+  function lib(k) {
+    return libsP[k] || (libsP[k] = new Promise((res, rej) => {
+      const sc = document.createElement("script");
+      sc.src = LIBS[k]; sc.onload = res; sc.onerror = () => { libsP[k] = null; rej(new Error(k)); };
+      document.head.appendChild(sc);
+    }));
+  }
+  function offer(nome, blob) {
+    const u = URL.createObjectURL(blob), a = document.createElement("a");
+    a.href = u; a.download = nome; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(u), 4000);
+  }
+  const limpa = n => n.replace(/[\\/:*?"<>|\u0000-\u001f]+/g, " ").replace(/\.+$/, "").replace(/\s+/g, " ").trim();
+  const baseName = () => limpa(state.title || "") || "planilha";
+
+  async function savePdf(nome) {
+    toast("Preparando o PDF…");
+    const root = document.documentElement;
+    try {
+      await Promise.all([lib("h2c"), lib("jspdf")]);
+      if (document.fonts && document.fonts.ready) await document.fonts.ready;
+      if (editing) commit(0, 0, true);
+      root.classList.add("printing");
+      await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+      const canvas = await html2canvas(document.querySelector(".sheet"), {
+        scale: 2, backgroundColor: null, logging: false, windowWidth: Math.max(root.clientWidth, 1320),
+        onclone: doc => {
+          doc.documentElement.classList.add("printing");
+          doc.querySelector(".gridwrap").style.overflow = "visible";
+          doc.querySelector(".sheet").style.width = "max-content";
+          doc.querySelector(".sheet").style.boxShadow = "none";   // o html2canvas pinta a sombra por cima do papel
+        },
+      });
+      root.classList.remove("printing");
+      const { jsPDF } = window.jspdf;
+      const M = 28, A = [841.89, 595.28];
+      const kL = Math.min((A[0] - 2 * M) / canvas.width, (A[1] - 2 * M) / canvas.height);
+      const kP = Math.min((A[1] - 2 * M) / canvas.width, (A[0] - 2 * M) / canvas.height);
+      const land = kL >= kP, k = land ? kL : kP;
+      const pdf = new jsPDF({ unit: "pt", format: "a4", orientation: land ? "landscape" : "portrait", compress: true });
+      const pw = pdf.internal.pageSize.getWidth(), ph = pdf.internal.pageSize.getHeight();
+      const w = canvas.width * k, h = canvas.height * k;
+      pdf.addImage(canvas.toDataURL("image/jpeg", 0.92), "JPEG", (pw - w) / 2, (ph - h) / 2, w, h, undefined, "FAST");
+      pdf.setProperties({ title: state.title || "Planilha", creator: "Planilha Datilografada" });
+      offer(nome, pdf.output("blob"));
+      toast("PDF pronto.");
+    } catch (e) {
+      root.classList.remove("printing");
+      toast("Não foi possível fazer o PDF. Verifique a conexão e tente de novo.");
+    }
+  }
+
+  // fórmulas da folha (português, ";") para o Excel (inglês, ","), que as mostra no idioma de quem abre
+  const XFN = { SOMA: "SUM", MEDIA: "AVERAGE", MAX: "MAX", MIN: "MIN", CONT: "COUNT", ARRED: "ROUND", SE: "IF", ABS: "ABS" };
+  function toExcel(src) {
+    let ex = src.toUpperCase().replace(/(\d),(\d)/g, "$1.$2");
+    ex = ex.replace(FN_RE, (m, name) => XFN[FN_ALIASES[name]] + "(");
+    return ex.replace(/;/g, ",");
+  }
+  async function saveXlsx(nome) {
+    toast("Preparando o Excel…");
+    try {
+      await lib("exceljs");
+      if (editing) commit(0, 0, true);
+      const wb = new ExcelJS.Workbook();
+      wb.creator = "Planilha Datilografada"; wb.title = state.title || ""; wb.created = new Date();
+      const aba = (limpa(state.title || "").replace(/[\[\]:*?\/\\]/g, " ").trim() || "Planilha").slice(0, 31);
+      const ws = wb.addWorksheet(aba);
+      ws.columns = WIDTHS.map(w => ({ width: Math.round(w / 7.2) }));
+      const vermelho = { argb: modo === "1895" ? "FF9E2418" : "FFB0271F" };
+      const base = modo === "1895" ? { name: "Georgia", italic: true, size: 11 } : { name: "Courier New", size: 11 };
+      const NUM2 = "#,##0.00;[Red]-#,##0.00", NUM0 = "#,##0;[Red]-#,##0";
+      memo = new Map();
+      for (const id of Object.keys(state.cells)) {
+        const cell = state.cells[id]; if (!cell) continue;
+        const raw = cell.v || "", v = valueOf(id), xc = ws.getCell(id);
+        if (raw[0] === "=") {
+          xc.value = { formula: toExcel(raw.slice(1)), result: v.t === "n" ? v.n : v.t === "s" ? v.s : undefined };
+          if (v.t === "n") xc.numFmt = NUM2;
+        } else if (v.t === "n") { xc.value = v.n; xc.numFmt = v.dec ? NUM2 : NUM0; }
+        else if (v.t === "s") xc.value = v.s;
+        const f = Object.assign({}, base);
+        if (cell.b) f.bold = true;
+        if (cell.u) f.underline = true;
+        if (cell.r) f.color = vermelho;
+        xc.font = f;
+        if (cell.d) xc.border = { bottom: { style: "double" } };
+        if (v.t === "n" || raw[0] === "=") xc.alignment = { horizontal: "right" };
+      }
+      const amp = x => String(x || "").replace(/&/g, "&&");
+      ws.headerFooter = { oddHeader: "&L" + amp(state.title) + "&R" + (state.folha ? "Folha nº " + amp(state.folha) : "") + (state.data ? "   " + amp(state.data) : "") };
+      ws.pageSetup = { paperSize: 9, orientation: "landscape", fitToPage: true, fitToWidth: 1, fitToHeight: 0 };
+      const buf = await wb.xlsx.writeBuffer();
+      offer(nome, new Blob([buf], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" }));
+      toast("Excel pronto.");
+    } catch (e) {
+      toast("Não foi possível fazer o Excel. Verifique a conexão e tente de novo.");
+    }
+  }
+
+  let saveKind = "pdf";
+  function askName(kind) {
+    saveKind = kind;
+    $("fext").textContent = "." + kind; $("fname").value = baseName();
+    $("namedlg").showModal(); $("fname").focus(); $("fname").select();
+  }
+  document.querySelectorAll("#expmenu [data-kind]").forEach(b => b.addEventListener("click", () => { closePops(); askName(b.dataset.kind); }));
+  $("fcancel").addEventListener("click", () => $("namedlg").close());
+  $("namedlg").querySelector("form").addEventListener("submit", ev => {
+    ev.preventDefault();
+    const n = limpa($("fname").value) || baseName();
+    $("namedlg").close();
+    (saveKind === "pdf" ? savePdf : saveXlsx)(n + "." + saveKind);
+  });
+
   /* ---------------- época ---------------- */
   function applyModo(m) {
     const antes = modo;
@@ -872,7 +1214,7 @@ html[data-modo="1895"] .grid td input.ed { font-size: 16px; background: rgba(247
     if (state && antes !== modo && JSON.stringify(state) === JSON.stringify(demo(antes))) {
       state = demo(modo); save(); syncMeta();
     }
-    if (state) renderAll();
+    if (state) { renderAll(); shelve(); }
   }
   document.getElementById("k-1940").addEventListener("click", () => { if (modo !== "1940") { applyModo("1940"); toast("1940: à máquina."); } });
   document.getElementById("k-1895").addEventListener("click", () => { if (modo !== "1895") { applyModo("1895"); toast("1895: à pena."); } });
@@ -894,6 +1236,7 @@ html[data-modo="1895"] .grid td input.ed { font-size: 16px; background: rgba(247
   syncMeta();
   sel = "E12";
   applyModo(modo);
+  { let b = "1"; try { b = localStorage.getItem(BARKEY) || "1"; } catch (e) {} setBar(b !== "0", false); }
 })();
 </script>
 </body>
